@@ -1,0 +1,3 @@
+[zenoss.zenpacks]
+ZenPacks.community.zenJavaEhcache = ZenPacks.community.zenJavaEhcache
+
