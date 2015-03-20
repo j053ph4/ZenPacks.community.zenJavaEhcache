@@ -1,9 +1,13 @@
-from Products.DataCollector.plugins.CollectorPlugin import CollectorPlugin
-from Products.DataCollector.plugins.DataMaps import ObjectMap
-from Products.ZenUtils.Utils import prepId
-from ZenPacks.community.zenJavaApp.lib.JavaAppScan import *
 from ZenPacks.community.zenJavaApp.lib.CommonMBeanMap import *
 from ZenPacks.community.zenJavaEhcache.Definition import *
+
+__doc__ = """EhcacheCacheMBeanMap
+
+EhcacheCacheMBeanMap detects JVM EHCache Caches on a per-JVM basis.
+
+This version adds a relation to associated ipservice and javaapp components.
+
+"""
 
 class EhcacheCacheMBeanMap(CommonMBeanMap):
     """Map JMX Client output table to model."""
@@ -14,3 +18,9 @@ class EhcacheCacheMBeanMap(CommonMBeanMap):
     baseid = constr.baseid
     
     searchMBean = 'net.sf.ehcache:type=CacheStatistics,CacheManager=*,name=*'
+    
+    def postprocess(self, result, om, log):
+        ''''''
+        om.setProductKey = MultiArgs('Ehcache', 'Terracotta')
+        return om
+
